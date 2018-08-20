@@ -1,6 +1,6 @@
 {
   "name": "gatsby-plugin-brotli",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Gatsby plugin for preparing brotli-compressed versions of assets",
   "main": "index.js",
   "scripts": {
