@@ -1,6 +1,7 @@
 # gatsby-plugin-brotli
 
-[![Build Status](https://travis-ci.com/ovhemert/gatsby-plugin-brotli.svg?branch=master)](https://travis-ci.com/ovhemert/gatsby-plugin-brotli)
+[![Travis](https://img.shields.io/travis/com/ovhemert/gatsby-plugin-brotli.svg?branch=master&logo=travis)](https://travis-ci.com/ovhemert/gatsby-plugin-brotli)
+[![AppVeyor](https://img.shields.io/appveyor/ci/ovhemert/gatsby-plugin-brotli.svg?logo=appveyor)](https://ci.appveyor.com/project/ovhemert/gatsby-plugin-brotli)
 [![Dependencies](https://img.shields.io/david/ovhemert/gatsby-plugin-brotli.svg)](https://david-dm.org/ovhemert/gatsby-plugin-brotli)
 [![Known Vulnerabilities](https://snyk.io/test/npm/gatsby-plugin-brotli/badge.svg)](https://snyk.io/test/npm/gatsby-plugin-brotli)
 [![Coverage Status](https://coveralls.io/repos/github/ovhemert/gatsby-plugin-brotli/badge.svg?branch=master)](https://coveralls.io/github/ovhemert/gatsby-plugin-brotli?branch=master)
