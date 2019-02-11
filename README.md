@@ -47,8 +47,8 @@ module.exports = {
 ## Maintainers
 
 Osmond van Hemert
-[![Github](https://img.shields.io/badge/style-github-333333.svg?logo=github&logoColor=white&label=)](https://github.com/ovhemert/about)
-[![Web](https://img.shields.io/badge/style-website-333333.svg?logoColor=white&label=&logo=diaspora)](https://www.osmondvanhemert.nl)
+[![Github](https://img.shields.io/badge/-github-333333.svg?logo=github&logoColor=white)](https://github.com/ovhemert/about)
+[![Web](https://img.shields.io/badge/-website-333333.svg?logo=nextdoor&logoColor=white)](https://www.osmondvanhemert.nl)
 
 ## Contributing
 
