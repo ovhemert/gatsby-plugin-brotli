@@ -17,6 +17,10 @@ becomes
 /webpack-runtime-cde5506958f1afc4d89e.js.br
 ```
 
+## Requirements
+
+This plugin wil only generate the compressed files. To see them been served to the client, your Gatsby website should run on a production server that supports Brotli .br-files. The Gatsby development server **does not** serve the compressed versions.
+
 ## Installation
 
 With npm:
