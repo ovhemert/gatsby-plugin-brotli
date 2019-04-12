@@ -59,6 +59,10 @@ Osmond van Hemert
 
 See the [CONTRIBUTING](./docs/CONTRIBUTING.md) file for details.
 
+## Sponsors
+
+[![BrowserStack](./docs/assets/browserstack-logo.svg)](https://www.browserstack.com/)
+
 ## License
 
 Licensed under [MIT](./LICENSE).
