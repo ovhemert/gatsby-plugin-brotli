@@ -29,7 +29,7 @@ class WebpackPlugin {
   }
 }
 
-async function compressFile (file) {
+async function compressFile (file, pluginOptions) {
   // brotli compress the asset to a new file with the .br extension
   const readFileAsync = util.promisify(fs.readFile)
   const writeFileAsync = util.promisify(fs.writeFile)
@@ -37,14 +37,32 @@ async function compressFile (file) {
   const filePath = path.join(process.cwd(), 'public', file)
   const content = await readFileAsync(filePath)
   const compressed = await brotli.compress(content)
-  const newFileName = filePath + '.br'
+
+  let newFileName = filePath + '.br'
+  if (pluginOptions && pluginOptions.path) {
+    let path = pluginOptions.path
+    if (!path.startsWith('/')) {
+      path = '/' + path
+    }
+    if (!path.endsWith('/')) {
+      path = path + '/'
+    }
+    newFileName = newFileName.replace('/public/', `/public${path}`)
+
+    const mkdirAsync = util.promisify(fs.mkdir)
+    const dir = newFileName.split(path)[0] + path
+
+    if (!fs.existsSync(dir)) {
+      await mkdirAsync(dir)
+    }
+  }
   await writeFileAsync(newFileName, compressed)
 }
 
 function onPostBuild (args, pluginOptions) {
   // after asset files have been generated, compress them
   const compress = Object.keys(assetsCompress).map(file => {
-    return compressFile(file)
+    return compressFile(file, pluginOptions)
   })
   return Promise.all(compress)
 }

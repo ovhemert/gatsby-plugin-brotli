@@ -49,6 +49,22 @@ module.exports = {
 }
 ```
 
+You can even place all the brotli-compressed files (only the brotli ones, the uncompressed ones will
+be saved in the `public` directory as usual) in a dedicated directory (ex. `public/brotli`):
+
+```javascript
+module.exports = {
+  plugins: [
+    {
+      resolve: 'gatsby-plugin-brotli',
+      options: {
+        path: 'brotli'
+      }
+    }
+  ]
+}
+```
+
 ## Maintainers
 
 Osmond van Hemert
