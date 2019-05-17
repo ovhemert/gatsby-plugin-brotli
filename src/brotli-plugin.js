@@ -29,34 +29,25 @@ class WebpackPlugin {
   }
 }
 
-async function compressFile (file, pluginOptions) {
+async function compressFile (file, pluginOptions = {}) {
   // brotli compress the asset to a new file with the .br extension
   const readFileAsync = util.promisify(fs.readFile)
   const writeFileAsync = util.promisify(fs.writeFile)
 
-  const filePath = path.join(process.cwd(), 'public', file)
-  const content = await readFileAsync(filePath)
+  const fileBasePath = path.join(process.cwd(), 'public')
+  const srcFileName = path.join(fileBasePath, file)
+  const content = await readFileAsync(srcFileName)
   const compressed = await brotli.compress(content)
 
-  let newFileName = filePath + '.br'
-  if (pluginOptions && pluginOptions.path) {
-    let path = pluginOptions.path
-    if (!path.startsWith('/')) {
-      path = '/' + path
-    }
-    if (!path.endsWith('/')) {
-      path = path + '/'
-    }
-    newFileName = newFileName.replace('/public/', `/public${path}`)
+  const destFilePath = (pluginOptions.path) ? path.join(fileBasePath, pluginOptions.path) : fileBasePath
+  const destFileName = path.join(destFilePath, file) + '.br'
 
+  if (!fs.existsSync(destFilePath)) {
     const mkdirAsync = util.promisify(fs.mkdir)
-    const dir = newFileName.split(path)[0] + path
-
-    if (!fs.existsSync(dir)) {
-      await mkdirAsync(dir)
-    }
+    await mkdirAsync(destFilePath)
   }
-  await writeFileAsync(newFileName, compressed)
+
+  await writeFileAsync(destFileName, compressed)
 }
 
 function onPostBuild (args, pluginOptions) {
