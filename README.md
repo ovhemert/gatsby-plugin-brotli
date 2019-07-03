@@ -49,6 +49,21 @@ module.exports = {
 }
 ```
 
+By default, only `.css` and `.js` files are compressed, but you can override this with the `extensions` option.
+
+```javascript
+module.exports = {
+  plugins: [
+    {
+      resolve: 'gatsby-plugin-brotli',
+      options: {
+        extensions: ['css', 'html', 'js', 'svg']
+      }
+    }
+  ]
+}
+```
+
 You can even place all the brotli-compressed files (only the brotli ones, the uncompressed ones will
 be saved in the `public` directory as usual) in a dedicated directory (ex. `public/brotli`):
 
