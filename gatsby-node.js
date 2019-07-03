@@ -1,23 +1,5 @@
 'use strict'
 
-const defaultOptions = {
-  extensions: ['css', 'js']
-}
+const brotliPlugin = require('./src/brotli-plugin')
 
-const PluginBrotli = require('./src/brotli-plugin')
-
-exports.onCreateWebpackConfig = ({ stage, getConfig, rules, loaders, actions }, pluginOptions) => {
-  const options = {
-    ...defaultOptions,
-    ...pluginOptions
-  }
-  if (stage === 'build-javascript') {
-    actions.setWebpackConfig({
-      plugins: [
-        new PluginBrotli.WebpackPlugin(options)
-      ]
-    })
-  }
-}
-
-exports.onPostBuild = PluginBrotli.onPostBuild
+exports.onPostBuild = brotliPlugin.onPostBuild
