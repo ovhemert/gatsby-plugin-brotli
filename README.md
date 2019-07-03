@@ -1,7 +1,6 @@
 # gatsby-plugin-brotli
 
 [![Travis](https://img.shields.io/travis/com/ovhemert/gatsby-plugin-brotli.svg?branch=master&logo=travis)](https://travis-ci.com/ovhemert/gatsby-plugin-brotli)
-[![AppVeyor](https://img.shields.io/appveyor/ci/ovhemert/gatsby-plugin-brotli.svg?logo=appveyor)](https://ci.appveyor.com/project/ovhemert/gatsby-plugin-brotli)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/87a2946ec87e42869eb37cc731aee4e1)](https://www.codacy.com/app/ovhemert/gatsby-plugin-brotli?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ovhemert/gatsby-plugin-brotli&amp;utm_campaign=Badge_Grade)
 [![Known Vulnerabilities](https://snyk.io/test/npm/gatsby-plugin-brotli/badge.svg)](https://snyk.io/test/npm/gatsby-plugin-brotli)
 [![Greenkeeper badge](https://badges.greenkeeper.io/ovhemert/gatsby-plugin-brotli.svg)](https://greenkeeper.io/)
