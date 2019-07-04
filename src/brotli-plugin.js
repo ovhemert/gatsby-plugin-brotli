@@ -35,7 +35,7 @@ async function compressFile (file, pluginOptions = {}) {
 async function onPostBuild (args, pluginOptions) {
   const options = { ...defaultOptions, ...pluginOptions }
   const fileBasePath = path.join(process.cwd(), 'public')
-  const patternExt = (options.extensions.length > 1) ? `${options.extensions.join(',')}` : options.extensions[0]
+  const patternExt = (options.extensions.length > 1) ? `{${options.extensions.join(',')}}` : options.extensions[0]
   const pattern = `**/*.${patternExt}`
 
   const files = await globAsync(pattern, { cwd: fileBasePath, ignore: '**/*.br' })
