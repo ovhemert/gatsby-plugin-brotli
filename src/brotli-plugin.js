@@ -20,6 +20,8 @@ async function onPostBuild (args, pluginOptions) {
   const pattern = `**/*.${patternExt}`
 
   const files = await globAsync(pattern, { cwd: fileBasePath, ignore: '**/*.br', nodir: true })
+  const tmrStart = new Date().getTime()
+
   const compress = files.map(file => {
     return new Promise((resolve, reject) => {
       worker(file, pluginOptions, err => err ? reject(err) : resolve())
@@ -27,6 +29,9 @@ async function onPostBuild (args, pluginOptions) {
   })
   await Promise.all(compress)
   workerFarm.end(worker)
+
+  const tmrEnd = new Date().getTime()
+  console.log(`Brotli compressed ${files.length} files in ${(tmrEnd - tmrStart) / 1000} s`)
 }
 
 exports.onPostBuild = onPostBuild
