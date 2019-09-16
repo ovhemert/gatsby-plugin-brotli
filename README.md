@@ -19,7 +19,7 @@ becomes
 
 ## Requirements
 
-This plugin wil only generate the compressed files. To see them been served to the client, your Gatsby website should run on a production server that supports Brotli .br-files. The Gatsby development server **does not** serve the compressed versions.
+This plugin will only generate the compressed files. To see them been served to the client, your Gatsby website should run on a production server that supports Brotli .br-files. The Gatsby development server **does not** serve the compressed versions.
 
 ## Installation
 
