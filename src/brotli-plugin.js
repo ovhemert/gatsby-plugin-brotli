@@ -1,11 +1,10 @@
 'use strict'
 
-const brotli = require('brotli')
-const fs = require('fs')
 const glob = require('glob')
-const mkdirp = require('mkdirp')
 const path = require('path')
 const util = require('util')
+const workerFarm = require('worker-farm')
+const worker = require.resolve('./worker')
 
 const defaultOptions = {
   extensions: ['css', 'js'],
@@ -13,24 +12,6 @@ const defaultOptions = {
 }
 
 const globAsync = util.promisify(glob)
-const mkdirpAsync = util.promisify(mkdirp)
-const readFileAsync = util.promisify(fs.readFile)
-const writeFileAsync = util.promisify(fs.writeFile)
-
-async function compressFile (file, pluginOptions = {}) {
-  // brotli compress the asset to a new file with the .br extension
-  const fileBasePath = path.join(process.cwd(), 'public')
-  const srcFileName = path.join(fileBasePath, file)
-  const content = await readFileAsync(srcFileName)
-  const compressed = await brotli.compress(content)
-
-  const destFilePath = (pluginOptions.path) ? path.join(fileBasePath, pluginOptions.path) : fileBasePath
-  const destFileName = path.join(destFilePath, file) + '.br'
-  const destFileDirname = path.dirname(destFileName)
-
-  await mkdirpAsync(destFileDirname)
-  await writeFileAsync(destFileName, compressed)
-}
 
 async function onPostBuild (args, pluginOptions) {
   const options = { ...defaultOptions, ...pluginOptions }
@@ -39,10 +20,19 @@ async function onPostBuild (args, pluginOptions) {
   const pattern = `**/*.${patternExt}`
 
   const files = await globAsync(pattern, { cwd: fileBasePath, ignore: '**/*.br', nodir: true })
+  const tmrStart = new Date().getTime()
+
+  const compressFile = workerFarm(worker)
   const compress = files.map(file => {
-    return compressFile(file, pluginOptions)
+    return new Promise((resolve, reject) => {
+      compressFile(file, pluginOptions, err => err ? reject(err) : resolve())
+    })
   })
-  return Promise.all(compress)
+  await Promise.all(compress)
+  workerFarm.end(compressFile)
+
+  const tmrEnd = new Date().getTime()
+  console.log(`Brotli compressed ${files.length} files in ${(tmrEnd - tmrStart) / 1000} s`)
 }
 
 exports.onPostBuild = onPostBuild
