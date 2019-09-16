@@ -30,6 +30,6 @@
     "worker-farm": "^1.7.0"
   },
   "devDependencies": {
-    "standard": "^13.1.0"
+    "standard": "^14.3.0"
   }
 }
