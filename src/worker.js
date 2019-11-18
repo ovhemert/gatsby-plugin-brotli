@@ -1,6 +1,6 @@
 'use strict'
 
-const brotli = require('brotli')
+const iltorb = require('iltorb')
 const fs = require('fs')
 const util = require('util')
 const mkdirp = require('mkdirp')
@@ -14,7 +14,7 @@ async function compressFile (file, pluginOptions = {}) {
   const fileBasePath = path.join(process.cwd(), 'public')
   const srcFileName = path.join(fileBasePath, file)
   const content = await readFileAsync(srcFileName)
-  const compressed = await brotli.compress(content)
+  const compressed = await iltorb.compress(content)
 
   const destFilePath = (pluginOptions.path) ? path.join(fileBasePath, pluginOptions.path) : fileBasePath
   const destFileName = path.join(destFilePath, file) + '.br'
