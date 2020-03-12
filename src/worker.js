@@ -4,7 +4,6 @@ const brotli = require('brotli')
 const fs = require('fs')
 const util = require('util')
 const mkdirp = require('mkdirp')
-const mkdirpAsync = util.promisify(mkdirp)
 const readFileAsync = util.promisify(fs.readFile)
 const writeFileAsync = util.promisify(fs.writeFile)
 const path = require('path')
@@ -20,7 +19,7 @@ async function compressFile (file, pluginOptions = {}) {
   const destFileName = path.join(destFilePath, file) + '.br'
   const destFileDirname = path.dirname(destFileName)
 
-  await mkdirpAsync(destFileDirname)
+  await mkdirp(destFileDirname)
   await writeFileAsync(destFileName, compressed)
 }
 
