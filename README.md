@@ -4,7 +4,6 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/87a2946ec87e42869eb37cc731aee4e1)](https://www.codacy.com/app/ovhemert/gatsby-plugin-brotli?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ovhemert/gatsby-plugin-brotli&amp;utm_campaign=Badge_Grade)
 [![Known Vulnerabilities](https://snyk.io/test/npm/gatsby-plugin-brotli/badge.svg)](https://snyk.io/test/npm/gatsby-plugin-brotli)
 [![Coverage Status](https://coveralls.io/repos/github/ovhemert/gatsby-plugin-brotli/badge.svg)](https://coveralls.io/github/ovhemert/gatsby-plugin-brotli)
-[![Greenkeeper badge](https://badges.greenkeeper.io/ovhemert/gatsby-plugin-brotli.svg)](https://greenkeeper.io/)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
 
 Gatsby plugin for preparing brotli-compressed versions of assets.
