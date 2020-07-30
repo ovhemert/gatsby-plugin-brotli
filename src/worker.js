@@ -9,19 +9,17 @@ const zlib = require('zlib')
 
 const pipelineAsync = util.promisify(pipeline)
 
-module.exports = async function ({ file, options = {} }) {
-  // brotli compress the asset to a new file with the .br extension
-
-  const fileBasePath = path.join(process.cwd(), 'public')
-  const srcFileName = path.join(fileBasePath, file)
-  const destFilePath = (options.path) ? path.join(fileBasePath, options.path) : fileBasePath
-  const destFileName = path.join(destFilePath, file) + '.br'
-  const destFileDirname = path.dirname(destFileName)
-
-  await mkdirp(destFileDirname)
+async function brotliCompressFile (from, to) {
+  const toDir = path.dirname(to)
+  console.log(toDir)
+  await mkdirp(toDir)
   await pipelineAsync(
-    fs.createReadStream(srcFileName),
+    fs.createReadStream(from),
     zlib.createBrotliCompress(),
-    fs.createWriteStream(destFileName)
+    fs.createWriteStream(to)
   )
+}
+
+module.exports = async function ({ from, to }) {
+  return brotliCompressFile(from, to)
 }

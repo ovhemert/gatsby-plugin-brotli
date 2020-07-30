@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "standard",
-    "test": "standard && tap test/*.test.js --coverage",
+    "test": "standard && tap test/*.test.js --coverage --100",
     "test:report": "standard && tap test/*.test.js --coverage  --coverage-report=html --100",
     "posttest": "tap --coverage --coverage-report=lcovonly"
   },
