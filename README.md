@@ -1,14 +1,12 @@
 # gatsby-plugin-brotli
 
-[![Travis](https://img.shields.io/travis/com/ovhemert/gatsby-plugin-brotli.svg?branch=master&logo=travis)](https://travis-ci.com/ovhemert/gatsby-plugin-brotli)
+[![CI](https://github.com/ovhemert/gatsby-plugin-brotli/workflows/CI/badge.svg)](https://github.com/ovhemert/gatsby-plugin-brotli/actions)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/87a2946ec87e42869eb37cc731aee4e1)](https://www.codacy.com/app/ovhemert/gatsby-plugin-brotli?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ovhemert/gatsby-plugin-brotli&amp;utm_campaign=Badge_Grade)
 [![Known Vulnerabilities](https://snyk.io/test/npm/gatsby-plugin-brotli/badge.svg)](https://snyk.io/test/npm/gatsby-plugin-brotli)
 [![Coverage Status](https://coveralls.io/repos/github/ovhemert/gatsby-plugin-brotli/badge.svg)](https://coveralls.io/github/ovhemert/gatsby-plugin-brotli)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
 
 Gatsby plugin for preparing brotli-compressed versions of assets.
-
-*Note: There is also a version of this plugin available, that uses native bindings ([gatsby-plugin-iltorb](https://github.com/ovhemert/gatsby-plugin-iltorb/)). The difference is that compression is faster, but bindings might not always be available for your system.*
 
 ```bash
 /webpack-runtime-cde5506958f1afc4d89e.js
@@ -89,7 +87,7 @@ Osmond van Hemert
 
 ## Contributing
 
-If you would like to help out with some code, check the [details](./docs/CONTRIBUTING.md).
+If you would like to help out with some code, check the [details](./.github/CONTRIBUTING.md).
 
 Not a coder, but still want to support? Have a look at the options available to [donate](https://ovhemert.dev/donate).
 
