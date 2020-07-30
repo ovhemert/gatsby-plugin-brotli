@@ -1,30 +1,27 @@
 'use strict'
 
-const brotli = require('brotli')
 const fs = require('fs')
-const util = require('util')
 const mkdirp = require('mkdirp')
-const readFileAsync = util.promisify(fs.readFile)
-const writeFileAsync = util.promisify(fs.writeFile)
 const path = require('path')
+const { pipeline } = require('stream')
+const util = require('util')
+const zlib = require('zlib')
 
-async function compressFile (file, pluginOptions = {}) {
+const pipelineAsync = util.promisify(pipeline)
+
+module.exports = async function ({ file, options = {} }) {
   // brotli compress the asset to a new file with the .br extension
+
   const fileBasePath = path.join(process.cwd(), 'public')
   const srcFileName = path.join(fileBasePath, file)
-  const content = await readFileAsync(srcFileName)
-  const compressed = await brotli.compress(content)
-
-  const destFilePath = (pluginOptions.path) ? path.join(fileBasePath, pluginOptions.path) : fileBasePath
+  const destFilePath = (options.path) ? path.join(fileBasePath, options.path) : fileBasePath
   const destFileName = path.join(destFilePath, file) + '.br'
   const destFileDirname = path.dirname(destFileName)
 
   await mkdirp(destFileDirname)
-  await writeFileAsync(destFileName, compressed)
-}
-
-module.exports = function (file, options, callback) {
-  compressFile(file, options)
-    .then(() => callback(null))
-    .catch((err) => callback(err))
+  await pipelineAsync(
+    fs.createReadStream(srcFileName),
+    zlib.createBrotliCompress(),
+    fs.createWriteStream(destFileName)
+  )
 }
