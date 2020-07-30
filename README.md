@@ -8,8 +8,6 @@
 
 Gatsby plugin for preparing brotli-compressed versions of assets.
 
-*Note: There is also a version of this plugin available, that uses native bindings ([gatsby-plugin-iltorb](https://github.com/ovhemert/gatsby-plugin-iltorb/)). The difference is that compression is faster, but bindings might not always be available for your system.*
-
 ```bash
 /webpack-runtime-cde5506958f1afc4d89e.js
 ```
@@ -89,7 +87,7 @@ Osmond van Hemert
 
 ## Contributing
 
-If you would like to help out with some code, check the [details](./docs/CONTRIBUTING.md).
+If you would like to help out with some code, check the [details](./.github/CONTRIBUTING.md).
 
 Not a coder, but still want to support? Have a look at the options available to [donate](https://ovhemert.dev/donate).
 
