@@ -11,7 +11,6 @@ const pipelineAsync = util.promisify(pipeline)
 
 async function brotliCompressFile (from, to) {
   const toDir = path.dirname(to)
-  console.log(toDir)
   await mkdirp(toDir)
   await pipelineAsync(
     fs.createReadStream(from),
