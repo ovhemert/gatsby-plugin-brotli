@@ -19,7 +19,19 @@ Changes are grouped by:
 
 ## [2.0.0](https://github.com/ovhemert/gatsby-plugin-brotli/compare/v1.3.1...v2.0.0) - 2020-07-30
 
-...
+### Added
+
+- Node v14.x support by [@ovhemert](https://github.com/ovhemert)
+- Tests and full code coverage by [@ovhemert](https://github.com/ovhemert)
+
+### Changed
+
+- Replaced worker farm with Node.js built-in worker threads by [@ovhemert](https://github.com/ovhemert)
+- Replaced brotli compression module with Node.js built-in functions by [@ovhemert](https://github.com/ovhemert)
+
+### Removed
+
+- Node v10.x support by [@ovhemert](https://github.com/ovhemert)
 
 ## [1.3.1](https://github.com/ovhemert/gatsby-plugin-brotli/compare/v1.2.4...v1.3.1) - 2019-11-19
 
