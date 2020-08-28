@@ -9,7 +9,8 @@ const Piscina = require('piscina')
 const defaultOptions = {
   cwd: path.join(process.cwd(), 'public'),
   extensions: ['css', 'js'],
-  path: ''
+  path: '',
+  fileExt: '.br'
 }
 
 const globAsync = util.promisify(glob)
@@ -24,7 +25,7 @@ async function onPostBuild ({ reporter }, pluginOptions) {
   const files = globResult.map(res => {
     return {
       from: path.join(options.cwd, res),
-      to: path.join(options.cwd, options.path, `${res}.br`)
+      to: path.join(options.cwd, options.path, res + options.fileExt)
     }
   })
 

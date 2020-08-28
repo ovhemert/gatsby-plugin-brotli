@@ -79,6 +79,22 @@ module.exports = {
 }
 ```
 
+If you want, you can specify the file extension for brotli compressed files. This is only useful in
+combination with path!
+```javascript
+module.exports = {
+  plugins: [
+    {
+      resolve: 'gatsby-plugin-brotli',
+      options: {
+        path: 'brotli',
+	fileExt: ''
+      }
+    }
+  ]
+}
+```
+
 ## Maintainers
 
 Osmond van Hemert
