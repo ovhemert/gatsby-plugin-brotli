@@ -1,8 +1,10 @@
 'use strict'
+const watcher = require('@parcel/watcher')
 
-const glob = require('glob')
+// const glob = require('glob')
+const minimatch = require('minimatch')
 const path = require('path')
-const util = require('util')
+const fs = require('fs')
 
 const Piscina = require('piscina')
 
@@ -12,7 +14,8 @@ const defaultOptions = {
   path: ''
 }
 
-const globAsync = util.promisify(glob)
+
+// const globAsync = util.promisify(glob)
 
 async function onPostBuild ({ reporter }, pluginOptions) {
   const options = { ...defaultOptions, ...pluginOptions }
@@ -20,11 +23,18 @@ async function onPostBuild ({ reporter }, pluginOptions) {
   // get the files
   const patternExt = (options.extensions.length > 1) ? `{${options.extensions.join(',')}}` : options.extensions[0]
   const pattern = `**/*.${patternExt}`
-  const globResult = await globAsync(pattern, { cwd: options.cwd, ignore: '**/*.br', nodir: true })
-  const files = globResult.map(res => {
+  const events = await watcher.getEventsSince(options.cwd, snapshotPath)
+  fs.unlinkSync(snapshotPath)
+  const removed = events.filter(e => e.type === `delete` && minimatch(e.path, pattern) && !minimatch(e.path, `**/*.br`)).map(e => `${e.path}.br`)
+  removed.forEach(path => {
+    fs.unlinkSync(path)
+  })
+  const paths = events.filter(e => (e.type === `create` || e.type === `update`) && minimatch(e.path, pattern) && !minimatch(e.path, `**/*.br`)).map(e => e.path)
+  const files = paths.map(res => {
+    let name = path.relative(options.cwd, res)
     return {
-      from: path.join(options.cwd, res),
-      to: path.join(options.cwd, options.path, `${res}.br`)
+      from: res,
+      to: path.join(options.cwd, options.path, `${name}.br`)
     }
   })
 
@@ -36,4 +46,14 @@ async function onPostBuild ({ reporter }, pluginOptions) {
   reporter.info(`Brotli compressed ${pool.completed} files - ${(pool.duration / 1000).toFixed(3)}s - ${(pool.runTime.average / 1000).toFixed(3)}/s`)
 }
 
+async function onPreBuild ({ reporter }, pluginOptions) {
+  const options = { ...defaultOptions, ...pluginOptions }
+
+  await watcher.writeSnapshot(options.cwd, snapshotPath)
+}
+
+
+const snapshotPath = ".gatsby-plugin-brotli-snapshot.txt"
+
 exports.onPostBuild = onPostBuild
+exports.onPreBuild = onPreBuild
