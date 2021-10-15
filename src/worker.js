@@ -14,7 +14,12 @@ async function brotliCompressFile (from, to) {
   await mkdirp(toDir)
   await pipelineAsync(
     fs.createReadStream(from),
-    zlib.createBrotliCompress(),
+    zlib.createBrotliCompress({
+      params: {
+        [zlib.constants.BROTLI_PARAM_QUALITY]: zlib.constants.BROTLI_MAX_QUALITY,
+        [zlib.constants.BROTLI_PARAM_SIZE_HINT]: fs.statSync(from).size
+      }
+    }),
     fs.createWriteStream(to)
   )
 }

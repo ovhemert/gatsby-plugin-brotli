@@ -48,6 +48,8 @@ module.exports = {
 }
 ```
 
+Currently, files are compressed using the highest level of compression supported by brotli.
+
 By default, only `.css` and `.js` files are compressed, but you can override this with the `extensions` option.
 
 ```javascript
