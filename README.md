@@ -48,8 +48,6 @@ module.exports = {
 }
 ```
 
-Currently, files are compressed using the highest level of compression supported by brotli.
-
 By default, only `.css` and `.js` files are compressed, but you can override this with the `extensions` option.
 
 ```javascript
@@ -59,6 +57,21 @@ module.exports = {
       resolve: 'gatsby-plugin-brotli',
       options: {
         extensions: ['css', 'html', 'js', 'svg']
+      }
+    }
+  ]
+}
+```
+
+By default, files are compressed using the highest level of compression supported by brotli, but you can override this with the `level` option.
+
+```javascript
+module.exports = {
+  plugins: [
+    {
+      resolve: 'gatsby-plugin-brotli',
+      options: {
+        level: 4
       }
     }
   ]

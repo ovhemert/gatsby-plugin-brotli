@@ -37,6 +37,19 @@ test('compress only single extension', t => {
     .finally(() => t.end())
 })
 
+test('compress with custom level', t => {
+  const cwd = t.testdir(TEST_DIR)
+  const args = { reporter: { info: sinon.fake() } }
+  tested.onPostBuild(args, { cwd, level: 1 })
+    .then(res => {
+      t.ok(fs.existsSync(path.join(cwd, 'test.css.br')))
+      t.ok(fs.existsSync(path.join(cwd, 'test.js.br')))
+      t.notOk(fs.existsSync(path.join(cwd, 'test.html.br')))
+    })
+    .catch(err => t.fail(err))
+    .finally(() => t.end())
+})
+
 test('compress to another folder', t => {
   const cwd = t.testdir(TEST_DIR)
   const dir = 'brotli'

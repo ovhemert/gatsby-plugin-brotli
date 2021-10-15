@@ -3,13 +3,15 @@
 const glob = require('glob')
 const path = require('path')
 const util = require('util')
+const zlib = require('zlib')
 
 const Piscina = require('piscina')
 
 const defaultOptions = {
   cwd: path.join(process.cwd(), 'public'),
   extensions: ['css', 'js'],
-  path: ''
+  path: '',
+  level: zlib.constants.BROTLI_MAX_QUALITY
 }
 
 const globAsync = util.promisify(glob)
@@ -24,7 +26,8 @@ async function onPostBuild ({ reporter }, pluginOptions) {
   const files = globResult.map(res => {
     return {
       from: path.join(options.cwd, res),
-      to: path.join(options.cwd, options.path, `${res}.br`)
+      to: path.join(options.cwd, options.path, `${res}.br`),
+      level: options.level
     }
   })
 

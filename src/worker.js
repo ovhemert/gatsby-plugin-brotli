@@ -9,14 +9,14 @@ const zlib = require('zlib')
 
 const pipelineAsync = util.promisify(pipeline)
 
-async function brotliCompressFile (from, to) {
+async function brotliCompressFile (from, to, level) {
   const toDir = path.dirname(to)
   await mkdirp(toDir)
   await pipelineAsync(
     fs.createReadStream(from),
     zlib.createBrotliCompress({
       params: {
-        [zlib.constants.BROTLI_PARAM_QUALITY]: zlib.constants.BROTLI_MAX_QUALITY,
+        [zlib.constants.BROTLI_PARAM_QUALITY]: level,
         [zlib.constants.BROTLI_PARAM_SIZE_HINT]: fs.statSync(from).size
       }
     }),
@@ -24,6 +24,6 @@ async function brotliCompressFile (from, to) {
   )
 }
 
-module.exports = async function ({ from, to }) {
-  return brotliCompressFile(from, to)
+module.exports = async function ({ from, to, level }) {
+  return brotliCompressFile(from, to, level)
 }
