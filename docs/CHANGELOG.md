@@ -17,6 +17,16 @@ Changes are grouped by:
 
 ...
 
+## [2.1.0](https://github.com/ovhemert/gatsby-plugin-brotli/compare/v2.0.0...v2.1.0) - 2021-10-18
+
+### Added
+
+- Use max brotli quality default by [@CAFxX](https://github.com/CAFxX)
+
+### Security
+
+- Update dependencies to prevent vulnerability issues by [@ovhemert](https://github.com/ovhemert)
+
 ## [2.0.0](https://github.com/ovhemert/gatsby-plugin-brotli/compare/v1.3.1...v2.0.0) - 2020-07-30
 
 ### Added
