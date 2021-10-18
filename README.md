@@ -63,6 +63,21 @@ module.exports = {
 }
 ```
 
+By default, files are compressed using the highest level of compression supported by brotli, but you can override this with the `level` option.
+
+```javascript
+module.exports = {
+  plugins: [
+    {
+      resolve: 'gatsby-plugin-brotli',
+      options: {
+        level: 4
+      }
+    }
+  ]
+}
+```
+
 You can even place all the brotli-compressed files (only the brotli ones, the uncompressed ones will
 be saved in the `public` directory as usual) in a dedicated directory (ex. `public/brotli`):
 
