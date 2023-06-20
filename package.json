@@ -28,7 +28,7 @@
   "dependencies": {
     "glob": "^8.0.3",
     "mkdirp": "^1.0.4",
-    "piscina": "^3.2.0"
+    "piscina": "^4.0.0"
   },
   "devDependencies": {
     "sinon": "^11.1.2",
